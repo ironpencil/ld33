@@ -63,7 +63,7 @@ public class Globals : Singleton<Globals>
         Globals.Instance.acceptPlayerGameInput = false;
 
         //TODO: do a screen transition
-        yield return StartCoroutine(screenTransition.TransitionCoverScreen(1.0f));
+        //yield return StartCoroutine(screenTransition.TransitionCoverScreen(1.0f));
 
         try
         {
@@ -73,7 +73,7 @@ public class Globals : Singleton<Globals>
 
         yield return null;
 
-        yield return StartCoroutine(screenTransition.TransitionUncoverScreen(1.0f));
+        //yield return StartCoroutine(screenTransition.TransitionUncoverScreen(1.0f));
 
         //AudioManager.Instance.StartMusic();
 

@@ -117,6 +117,8 @@ public class IntroPanel : MonoBehaviour
             }
         }
 
+        yield return null;
+
         minimumDisplayTimeMet = true;
 
         if (automaticallyDismiss)
@@ -133,7 +135,7 @@ public class IntroPanel : MonoBehaviour
 
                 elapsedTime += deltaTime;
 
-                float percentageComplete = elapsedTime / fadeInTime;
+                float percentageComplete = elapsedTime / fadeOutTime;
 
                 fader.alpha = 1 - percentageComplete;
             }
