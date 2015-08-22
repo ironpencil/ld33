@@ -14,20 +14,20 @@ public class Weapon : MonoBehaviour {
     public float attackDuration = 0.25f;
     public float attackDelay = 0.5f;    
 
-    private float lastAttackTime = 0.0f;
+    protected float lastAttackTime = 0.0f;
 
-    private bool doDealDamage = false;
+    protected bool doDealDamage = false;
     public Collider2D weaponCollider;
 
     public bool isAttacking = false;
-    private bool attackComplete = false;
+    protected bool attackComplete = false;
 
     public Animator attackerAnimator;
 
-    private const string ANIM_PARAM_ATTACKING = "attacking";
+    protected const string ANIM_PARAM_ATTACKING = "attacking";
 
     [SerializeField]
-    private bool equipped = false;
+    protected bool equipped = false;
     public bool Equipped
     {
         get
@@ -58,7 +58,7 @@ public class Weapon : MonoBehaviour {
 	
 	}    
 
-    public void OnTriggerEnter2D(Collider2D other)
+    public virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (doDealDamage)
         {
@@ -72,7 +72,7 @@ public class Weapon : MonoBehaviour {
         }
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         if (Time.time > lastAttackTime + attackDelay)
         {
@@ -83,7 +83,7 @@ public class Weapon : MonoBehaviour {
         }
     }
 
-    public IEnumerator DoAttack()
+    public virtual IEnumerator DoAttack()
     {      
         attackComplete = false;
         isAttacking = true;
@@ -108,7 +108,11 @@ public class Weapon : MonoBehaviour {
         doDealDamage = false;
         weaponCollider.enabled = false;
 
-        attackerAnimator.SetBool(ANIM_PARAM_ATTACKING, false);
+        if (attackerAnimator != null)
+        {
+            attackerAnimator.SetBool(ANIM_PARAM_ATTACKING, false);
+        }
+
         attackComplete = true;
         isAttacking = false;
 

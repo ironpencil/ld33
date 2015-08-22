@@ -14,6 +14,8 @@ public class FacingHandler : MonoBehaviour {
 
     public bool simpleFacing = true;
 
+    public bool majorityFacing = false;
+
     public bool doFacingInUpdate = true;
 	// Use this for initialization
 	void Start () {
@@ -42,9 +44,12 @@ public class FacingHandler : MonoBehaviour {
         float moveY = movementController.movementDirection.y;
         bool walking = false;
 
+        float absMoveX = Mathf.Abs(moveX);
+        float absMoveY = Mathf.Abs(moveY);
+
         if (simpleFacing)
         {
-            if (Mathf.Abs(moveX) > 0 || Mathf.Abs(moveY) > 0)
+            if (absMoveX > 0 || absMoveY > 0)
             {
                 walking = true;
 
@@ -54,12 +59,28 @@ public class FacingHandler : MonoBehaviour {
         }
         else
         {
-            if (Mathf.Abs(moveX) > 0 && Mathf.Abs(moveY) > 0)
+            if (absMoveX > 0 && absMoveY > 0)
             {
                 //they're moving in both directions
                 //so just use whatever our previous facing was
 
                 walking = true;
+
+                if (majorityFacing)
+                {
+                    //face in whichever direction we're moving MORE
+                    if (absMoveY > absMoveX)
+                    {
+                        facing.y = moveY;
+                        facing.x = 0.0f;
+                    }
+                    else
+                    {
+                        facing.x = moveX;
+                        facing.y = 0.0f;
+                    }
+
+                }
 
 
                 //TODO: make sure they haven't changed facing direction in one frame somehow
@@ -67,7 +88,7 @@ public class FacingHandler : MonoBehaviour {
             else
             {
                 // arbitrarily favor horizontal facing
-                if (Mathf.Abs(moveX) > 0)
+                if (absMoveX > 0)
                 {
                     moveY = 0.0f;
                     facing.x = moveX;
@@ -76,7 +97,7 @@ public class FacingHandler : MonoBehaviour {
                     walking = true;
                 }
 
-                if (Mathf.Abs(moveY) > 0)
+                if (absMoveY > 0)
                 {
                     facing.x = 0.0f;
                     facing.y = moveY;
@@ -86,8 +107,11 @@ public class FacingHandler : MonoBehaviour {
             }
         }
 
-        animator.SetFloat(ANIM_PARAM_FACING_X, facing.x);
-        animator.SetFloat(ANIM_PARAM_FACING_Y, facing.y);
-        animator.SetBool(ANIM_PARAM_WALKING, walking);
+        if (animator != null)
+        {
+            animator.SetFloat(ANIM_PARAM_FACING_X, facing.x);
+            animator.SetFloat(ANIM_PARAM_FACING_Y, facing.y);
+            animator.SetBool(ANIM_PARAM_WALKING, walking);
+        }
     }
 }

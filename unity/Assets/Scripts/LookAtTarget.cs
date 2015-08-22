@@ -3,15 +3,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class LookAtMouse : MonoBehaviour {
+public class LookAtTarget : MonoBehaviour {
 
-    public Vector2 TargetPos = Vector2.zero;
+    public Vector2 targetPos = Vector2.zero;
 
     public Rigidbody2D rb;
 
-    public bool usePhysics = false;
+    public bool usePhysics = true;
 
-    public bool alwaysRotate = true;
+    public bool rotateInUpdate = false;
     
 
 	// Use this for initialization
@@ -25,7 +25,7 @@ public class LookAtMouse : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (alwaysRotate && !usePhysics)
+        if (rotateInUpdate && !usePhysics)
         {
             RotateWithoutPhysics();
         }
@@ -46,7 +46,7 @@ public class LookAtMouse : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (alwaysRotate && usePhysics)
+        if (rotateInUpdate && usePhysics)
         {
             RotateWithPhysics();
             
@@ -60,10 +60,8 @@ public class LookAtMouse : MonoBehaviour {
 
     public void RotateWithoutPhysics()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         Vector3 thisPos = transform.localPosition;
-        Vector2 offset = new Vector2(mousePos.x - thisPos.x, mousePos.y - thisPos.y);
+        Vector2 offset = new Vector2(targetPos.x - thisPos.x, targetPos.y - thisPos.y);
 
         var angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
 
@@ -72,11 +70,9 @@ public class LookAtMouse : MonoBehaviour {
 
     public void RotateWithPhysics()
     {
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         Vector3 thisPos = transform.localPosition;
 
-        offset = new Vector2(mousePos.x - thisPos.x, mousePos.y - thisPos.y);
+        offset = new Vector2(targetPos.x - thisPos.x, targetPos.y - thisPos.y);
 
         //bool turnRight = offset.x > 0.0f;
 

@@ -3,9 +3,13 @@ using System.Collections;
 
 public class MoveTowardsTarget : BaseMovement {
 
-    public Transform target;    
+    public Transform target;
 
-    private Rigidbody2D rb;
+    public LookAtTarget rotateToTarget;
+
+    private Rigidbody2D rb;    
+
+    public Vector3 stopDistance = new Vector3(0.5f, 0.5f, 0.0f);
 
 	// Use this for initialization
 	void Start () {
@@ -43,6 +47,31 @@ public class MoveTowardsTarget : BaseMovement {
             return;
         }
 
-        movementDirection = (target.position - transform.position).normalized;        
+        Vector2 distanceToTarget = target.position - transform.position;
+
+        bool targetReached = false;
+
+        if (Mathf.Abs(distanceToTarget.x) < stopDistance.x && Mathf.Abs(distanceToTarget.y) < stopDistance.y)
+        {
+            targetReached = true;
+        }
+
+        if (targetReached)
+        {
+            movementDirection = Vector2.zero;
+        }
+        else
+        {
+            if (rotateToTarget == null)
+            {
+                movementDirection = distanceToTarget.normalized;
+            }
+            else
+            {
+                rotateToTarget.targetPos = target.position;
+                rotateToTarget.RotateWithPhysics();
+                movementDirection = transform.forward;
+            }
+        }
     }
 }

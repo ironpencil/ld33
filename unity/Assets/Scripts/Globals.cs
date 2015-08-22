@@ -18,6 +18,8 @@ public class Globals : Singleton<Globals>
 
     public float screenShakeFactor = 1.0f;
 
+    public Transform dynamicObjects;
+
     public override void Start()
     {
         base.Start();

@@ -14,11 +14,11 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Buildings
+  - Monster
+  - MonsterAttacks
+  - Tank
+  - TankAttacks
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Tank
+    uniqueID: 1180384999
+    locked: 0
+  - name: Monster
+    uniqueID: 3922672547
+    locked: 0
+  - name: World UI
+    uniqueID: 2104486697
     locked: 0

@@ -9,6 +9,10 @@ public class PlayerInput : MonoBehaviour {
 
     public bool canMoveWhileAttacking = false;
 
+    public string inputHorizontalAxis = "Horizontal";
+    public string inputVerticalAxis = "Vertical";
+    public string inputAttackButton = "Fire1";    
+
 	// Use this for initialization
 	void Start () {
 	
@@ -27,9 +31,12 @@ public class PlayerInput : MonoBehaviour {
 
     private void HandleAttack()
     {
-        if (Input.GetButtonDown("Attack"))
+        if (Input.GetButtonDown(inputAttackButton))
         {
-            weaponHandler.Attack(facingHandler.facing);
+            if (weaponHandler != null)
+            {
+                weaponHandler.Attack(facingHandler.facing);
+            }
         }
     }
 
@@ -39,10 +46,10 @@ public class PlayerInput : MonoBehaviour {
         float horizontal = 0.0f;
         float vertical = 0.0f;
 
-        if (canMoveWhileAttacking || !weaponHandler.IsAttacking())
+        if (canMoveWhileAttacking || weaponHandler == null || !weaponHandler.IsAttacking())
         {
-            horizontal = Input.GetAxis("Horizontal");
-            vertical = Input.GetAxis("Vertical");
+            horizontal = Input.GetAxis(inputHorizontalAxis);
+            vertical = Input.GetAxis(inputVerticalAxis);
         }
 
         float horizontalMovement = 0.0f;
@@ -68,6 +75,9 @@ public class PlayerInput : MonoBehaviour {
 
         movementController.movementDirection = new Vector2(horizontalMovement, verticalMovement);
 
-        facingHandler.UpdateFacing();
+        if (facingHandler != null)
+        {
+            facingHandler.UpdateFacing();
+        }
     }
 }
