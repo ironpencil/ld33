@@ -20,6 +20,8 @@ public class IntroPanel : MonoBehaviour
     public IntroPanel nextPanel;
     public GameObject introParent;
 
+    public List<GameEffect> displayEffects;
+
     public bool lastPanel = false;
     public bool deactivateSelfOnDismiss = true;
     public bool deactivateParentOnDismiss = false;
@@ -82,6 +84,11 @@ public class IntroPanel : MonoBehaviour
 
     public IEnumerator DoDisplayPanel()
     {
+        foreach (GameEffect displayEffect in displayEffects)
+        {
+            displayEffect.ActivateEffect(gameObject, 0.0f, null, null);
+        }
+
         float elapsedTime = 0.0f;
 
         while (elapsedTime < fadeInTime)

@@ -10,7 +10,8 @@ public class PlayerMouseInput : MonoBehaviour
 
     public bool canMoveWhileAttacking = false;
 
-    public string inputAttackButton = "Fire1";
+    public string inputMoveButton = "Fire1";
+    public string inputAttackButton = "Fire2";
 
     public Transform movementTarget;
     public Vector3 targetPosition;
@@ -49,7 +50,7 @@ public class PlayerMouseInput : MonoBehaviour
     void HandleMovement()
     {
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetButton(inputMoveButton))
         {
 
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

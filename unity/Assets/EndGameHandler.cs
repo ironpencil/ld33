@@ -7,6 +7,12 @@ public class EndGameHandler : MonoBehaviour {
     public MessageBox endGameMessageBox;
     public TextBox endGameTextBox;
 
+    [Multiline]
+    public string tankWinText = "TANK WINS! CLICK OK TO PLAY AGAIN.";
+
+    [Multiline]
+    public string monsterWinText = "MONSTER WINS! CLICK OK TO PLAY AGAIN.";
+
     public bool gameEnding = false;
 
     public void TankWon()
@@ -16,7 +22,7 @@ public class EndGameHandler : MonoBehaviour {
             gameEnding = true;
             endGameTextBox.textList = new List<string>();
 
-            endGameTextBox.textList.Add("Tank wins! Click OK to play again.");
+            endGameTextBox.textList.Add(tankWinText);
 
             StartCoroutine(WaitThenRestartGame());
         }
@@ -30,7 +36,7 @@ public class EndGameHandler : MonoBehaviour {
             gameEnding = true;
             endGameTextBox.textList = new List<string>();
 
-            endGameTextBox.textList.Add("Kaiju wins! Click OK to play again.");
+            endGameTextBox.textList.Add(monsterWinText);
 
             StartCoroutine(WaitThenRestartGame());
         }

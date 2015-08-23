@@ -7,6 +7,8 @@ public class HealthBar : MonoBehaviour {
     public Image fillBar;
 
     public float imageMaxHeight = 100.0f;
+
+    public bool invertSize = false;
     // Use this for initialization
     void Start()
     {
@@ -23,6 +25,10 @@ public class HealthBar : MonoBehaviour {
     {
         int imageHeight = (int)(imageMaxHeight * percent);
 
+        if (invertSize)
+        {
+            imageHeight = (int)imageMaxHeight - imageHeight;
+        }
 
         fillBar.rectTransform.sizeDelta = new Vector2(fillBar.rectTransform.sizeDelta.x, imageHeight);
 
