@@ -93,7 +93,7 @@ public class MessageBox : MonoBehaviour {
     {
         StartCoroutine(ToggleAndWait());
     }
-    
+
     public IEnumerator OpenAndWait(float duration)
     {
         SetVisible(true);
@@ -116,7 +116,7 @@ public class MessageBox : MonoBehaviour {
             openSound.PlayEffect();
         }
 
-        currentResize = Resize(closedSize, openSize, openTime, openStyle);
+        currentResize = Resize(closedSize, openSize, duration, openStyle);
         yield return StartCoroutine(currentResize);
         isOpen = true;
         EnableChildren(true);

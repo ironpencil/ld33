@@ -31,13 +31,14 @@ GameObject:
   - 114: {fileID: 11432880}
   - 114: {fileID: 11420328}
   - 114: {fileID: 11475112}
+  - 114: {fileID: 11446978}
   m_Layer: 12
   m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &132884
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +215,8 @@ MonoBehaviour:
   invulnerable: 0
   damagedEffects:
   - {fileID: 11475112}
-  deathEffects: []
+  deathEffects:
+  - {fileID: 11446978}
   doDamageEffectsOnDeath: 1
   pointValue: 100
   killValue: 1
@@ -249,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4c60f5c0d14ca45ac2fee56e8efdc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 6
   movementDirection: {x: 0, y: 0}
   disabled: 0
   moveDuringUpdate: 0
@@ -308,6 +310,17 @@ MonoBehaviour:
   varyFireDelay: 0
   fireDelayVariantRange: .00999999978
   continuousFire: 0
+--- !u!114 &11446978
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff703e86d8b7284bb47ac2d1dff3faa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11475112
 MonoBehaviour:
   m_ObjectHideFlags: 1

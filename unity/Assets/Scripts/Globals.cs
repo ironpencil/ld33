@@ -20,6 +20,9 @@ public class Globals : Singleton<Globals>
 
     public Transform dynamicObjects;
 
+    public ResetGameHandler resetGameHandler;
+    public EndGameHandler endGameHandler;
+
     public override void Start()
     {
         base.Start();
@@ -77,10 +80,12 @@ public class Globals : Singleton<Globals>
 
         //yield return StartCoroutine(screenTransition.TransitionUncoverScreen(1.0f));
 
-        //AudioManager.Instance.StartMusic();
+        //AudioManager.Instance.StartMusic();        
 
         Globals.Instance.Pause(false);
         Globals.Instance.acceptPlayerGameInput = true;
+
+        resetGameHandler.ResetGame();
 
         //TODO: do screen transition in
     }

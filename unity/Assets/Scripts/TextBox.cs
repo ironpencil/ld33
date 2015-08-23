@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 public class TextBox : MonoBehaviour {
 
-    public List<string> screenStrings;
+    [Multiline]
+    public List<string> textList;
 
     public int nextScreenIndex = 0;
 
@@ -15,8 +16,7 @@ public class TextBox : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-        NextScreen();
+        
 	}
 	
 	// Update is called once per frame
@@ -24,15 +24,21 @@ public class TextBox : MonoBehaviour {
 	
 	}
 
+    void OnEnable()
+    {
+        nextScreenIndex = 0;
+        NextScreen();
+    }
+
     public void NextScreen()
     {
-        if (nextScreenIndex >= screenStrings.Count)
+        if (nextScreenIndex >= textList.Count)
         {
             messageBox.StartClose();
             return;
         }
 
-        string nextText = screenStrings[nextScreenIndex];
+        string nextText = textList[nextScreenIndex];
 
         textControl.text = nextText;
         scrollbar.value = 1.0f;
